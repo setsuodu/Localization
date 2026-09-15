@@ -1,0 +1,32 @@
+{
+  "name": "com.setsuodu.localization",
+  "version": "1.0.0",
+  "displayName": "Localization",
+  "description": "Pure Excel-driven localization core for Unity. No ScriptableObject. Key-based. Binary hot-update friendly. UI bindings provided as Samples.",
+  "unity": "2022.3",
+  "author": {
+    "name": "setsuodu",
+    "url": "https://github.com/setsuodu"
+  },
+  "keywords": [
+    "localization",
+    "excel",
+    "i18n",
+    "l10n",
+    "multilingual"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "uGUI / TextMeshPro Demo",
+      "description": "LocText component for uGUI Text and TextMeshProUGUI, with sample CSV.",
+      "path": "Samples~/uGUI"
+    },
+    {
+      "displayName": "UI Toolkit Demo",
+      "description": "LocLabel VisualElement for UI Toolkit, with sample CSV.",
+      "path": "Samples~/UIToolkit"
+    }
+  ]
+}
