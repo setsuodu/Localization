@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 using Localization;
 
@@ -10,6 +11,7 @@ namespace Localization.Samples.uGUI
     /// Complete runnable demo: click language buttons to switch UI texts.
     /// Attach to any GameObject in an empty scene, assign the compiled .bytes TextAsset,
     /// then Play. No scene setup required.
+    /// Requires TextMeshPro package.
     /// </summary>
     public class LocDemo : MonoBehaviour
     {
@@ -20,7 +22,6 @@ namespace Localization.Samples.uGUI
         [Header("Optional overrides (leave empty to auto-create UI)")]
         [SerializeField] Transform uiRoot;
 
-        // runtime refs
         LocText _title;
         LocText _btnPlay;
         LocText _btnSettings;
@@ -69,24 +70,21 @@ namespace Localization.Samples.uGUI
 
         void BuildUI()
         {
-            // Canvas
             var canvasGo = new GameObject("LocDemoCanvas");
             var canvas = canvasGo.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvasGo.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasGo.AddComponent<GraphicRaycaster>();
 
-            // EventSystem if missing
-            if (FindObjectOfType<UnityEngine.EventSystems.EventSystem>() == null)
+            if (Object.FindFirstObjectByType<EventSystem>() == null)
             {
                 var es = new GameObject("EventSystem");
-                es.AddComponent<UnityEngine.EventSystems.EventSystem>();
-                es.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
+                es.AddComponent<EventSystem>();
+                es.AddComponent<StandaloneInputModule>();
             }
 
             uiRoot = canvasGo.transform;
 
-            // Vertical layout panel
             var panel = CreatePanel(uiRoot, new Vector2(0.5f, 0.5f), new Vector2(0, 40), new Vector2(420, 480));
             var vlg = panel.gameObject.AddComponent<VerticalLayoutGroup>();
             vlg.padding = new RectOffset(24, 24, 24, 24);
@@ -97,29 +95,22 @@ namespace Localization.Samples.uGUI
             vlg.childForceExpandWidth = true;
             vlg.childForceExpandHeight = false;
 
-            // Title
             _title = CreateLocText(panel, "ui.home.title", 36, FontStyles.Bold);
-
-            // Current language indicator
             _currentLangLabel = CreatePlainTMP(panel, "", 20, FontStyles.Normal);
 
-            // Play & Settings buttons (LocText on the button label)
-            var playGo = CreateButton(panel, out var playBtn);
+            var playGo = CreateButton(panel, out _);
             _btnPlay = playGo.GetComponentInChildren<LocText>();
             _btnPlay.Key = "ui.home.btn_play";
 
-            var settingsGo = CreateButton(panel, out var settingsBtn);
+            var settingsGo = CreateButton(panel, out _);
             _btnSettings = settingsGo.GetComponentInChildren<LocText>();
             _btnSettings.Key = "ui.home.btn_settings";
 
-            // Dynamic steps example
             _steps = CreateLocText(panel, "ui.game.steps", 22, FontStyles.Normal);
-            _steps.SetKey("ui.game.steps", 12); // demo with arg
+            _steps.SetKey("ui.game.steps", 12);
 
-            // Spacer
             CreatePlainTMP(panel, "— Language —", 16, FontStyles.Italic);
 
-            // Language switch buttons
             string[] langs = { "zh_CN", "en_US", "ja_JP", "ko_KR" };
             string[] langKeys = { "lang.zh_CN", "lang.en_US", "lang.ja_JP", "lang.ko_KR" };
 
@@ -158,12 +149,7 @@ namespace Localization.Samples.uGUI
 
             if (_currentLangLabel != null)
                 _currentLangLabel.text = $"Current: {Loc.CurrentLang}";
-
-            // Highlight active language button (optional visual)
-            // LocText already refreshed via OnLanguageChanged subscription inside LocText
         }
-
-        // ───────── UI helpers ─────────
 
         static RectTransform CreatePanel(Transform parent, Vector2 anchor, Vector2 anchoredPos, Vector2 size)
         {
@@ -220,7 +206,6 @@ namespace Localization.Samples.uGUI
             var le = go.AddComponent<LayoutElement>();
             le.preferredHeight = 48;
 
-            // Label child with LocText
             var labelGo = new GameObject("Label", typeof(RectTransform));
             labelGo.transform.SetParent(go.transform, false);
             var labelRt = labelGo.GetComponent<RectTransform>();
@@ -232,7 +217,7 @@ namespace Localization.Samples.uGUI
             tmp.fontSize = 22;
             tmp.alignment = TextAlignmentOptions.Center;
             tmp.color = Color.white;
-            labelGo.AddComponent<LocText>(); // Key set by caller
+            labelGo.AddComponent<LocText>();
 
             return go;
         }
