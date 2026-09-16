@@ -15,3 +15,7 @@ item.6.name,加五步,Extra Steps,手数+5,수 +5
 common.ok,确定,OK,OK,확인
 common.cancel,取消,Cancel,キャンセル,취소
 common.loading,加载中…,Loading…,読み込み中…,로딩 중…
+lang.zh_CN,中文,Chinese,中国語,중국어
+lang.en_US,英语,English,英語,영어
+lang.ja_JP,日语,Japanese,日本語,일본어
+lang.ko_KR,韩语,Korean,韓国語,한국어
