@@ -7,8 +7,8 @@ UI bindings (`LocText` / `LocLabel`) are provided as **Samples**, not core.
 
 ## Install
 
-```bash
-openupm add com.setsuodu.excel-localization
+```
+openupm add com.setsuodu.localization
 ```
 
 Or Package Manager → Add package from disk / git.
@@ -43,9 +43,9 @@ Loc.OnLanguageChanged += () => { /* refresh your UI */ };
 
 ## Editor
 
-**Tools → Excel Localization Compiler**
+**Tools → Localization Compiler**
 
-1. Export Localization.xlsx as UTF-8 CSV  
+1. Export `Localization.xlsx` as UTF-8 CSV
 2. Select CSV → compile to `.bytes`
 
 ## Samples
@@ -54,10 +54,15 @@ Import via Package Manager → Samples:
 
 | Sample | Content |
 |--------|---------|
-| **uGUI / TextMeshPro Demo** | `LocText` MonoBehaviour + sample CSV |
+| **uGUI / TextMeshPro Demo** | `LocText` + **LocDemo**（点击切换语言，标题/按钮/Label 实时刷新） |
 | **UI Toolkit Demo** | `LocLabel` VisualElement + sample CSV |
 
-Copy the sample scripts into your project and adapt as needed.
+### 一键体验语言切换
+
+1. 导入 **uGUI / TextMeshPro Demo**
+2. `Tools → Localization Compiler` 编译 `Localization.csv` → `Assets/Resources/Localization.bytes`
+3. 空场景挂 `LocDemo` 组件 → Play
+4. 点击底部 **中文 / English / 日本語 / 한국어** 按钮，界面标题、按钮文字、动态 Label 全部切换
 
 ## Binary Format
 

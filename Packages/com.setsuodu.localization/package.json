@@ -1,8 +1,8 @@
 {
   "name": "com.setsuodu.localization",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Localization",
-  "description": "Pure Excel-driven localization core for Unity. No ScriptableObject. Key-based. Binary hot-update friendly. UI bindings provided as Samples.",
+  "description": "Pure Excel-driven localization core for Unity. No ScriptableObject. Key-based. Binary hot-update friendly. UI bindings provided as Samples. Includes click-to-switch language demo.",
   "unity": "2022.3",
   "author": {
     "name": "setsuodu",
@@ -20,7 +20,7 @@
   "samples": [
     {
       "displayName": "uGUI / TextMeshPro Demo",
-      "description": "LocText component for uGUI Text and TextMeshProUGUI, with sample CSV.",
+      "description": "LocText + LocDemo: click language buttons to switch title/button/Label texts in real-time.",
       "path": "Samples~/uGUI"
     },
     {
