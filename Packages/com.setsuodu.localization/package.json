@@ -1,6 +1,6 @@
 {
   "name": "com.setsuodu.localization",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "displayName": "Localization",
   "description": "Pure Excel-driven localization core for Unity. No ScriptableObject. Key-based. Binary hot-update friendly. UI bindings as Samples (legacy uGUI Text + UI Toolkit with UXML demo).",
   "unity": "2022.3",

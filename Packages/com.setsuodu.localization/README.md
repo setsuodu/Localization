@@ -7,11 +7,11 @@ UI bindings (`LocText` / `LocLabel`) are provided as **Samples**, not core.
 
 ## Install
 
-```
+```bash
 openupm add com.setsuodu.localization
 ```
 
-Or Package Manager → Add package from disk / git.
+Or Package Manager → Add package from git / disk.
 
 ## Core API
 
@@ -57,7 +57,7 @@ Loc.OnLanguageChanged += () => { /* refresh your UI */ };
 
 ### uGUI 一键体验
 
-1. 导入 uGUI Demo → 编译 CSV → 挂 `LocDemo` → Play
+1. 导入 uGUI Demo → 编译 CSV → 挂 `LocDemo` 或打开 Sample 场景 → Play
 
 ### UI Toolkit 一键体验
 
@@ -79,6 +79,10 @@ KEY×N    string(key) + string×LANG_CNT
 
 string = int32 length (-1=null) + UTF-8
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
-MIT
+MIT — see [LICENSE.md](LICENSE.md).
