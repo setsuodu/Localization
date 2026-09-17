@@ -50,21 +50,21 @@ Loc.OnLanguageChanged += () => { /* refresh your UI */ };
 
 ## Samples
 
-Import via Package Manager → Samples:
-
 | Sample | Content |
 |--------|---------|
-| **uGUI Demo (Legacy Text)** | `LocText` + `LocDemo`，纯 `UnityEngine.UI.Text`，**不依赖 TMP** |
-| **UI Toolkit Demo** | `LocLabel` VisualElement + sample CSV |
+| **uGUI Demo (Legacy Text)** | `LocText` + `LocDemo`，纯 `UnityEngine.UI.Text`，无 TMP |
+| **UI Toolkit Demo** | `LocLabel` + `LocDemoUITK` + `LocDemo.uxml` / `.uss` |
 
-### 一键体验语言切换
+### uGUI 一键体验
 
-1. 导入 **uGUI Demo (Legacy Text)**
-2. `Tools → Localization Compiler` 编译 `Localization.csv` → `Assets/Resources/Localization.bytes`
-3. 空场景挂 `LocDemo` 组件 → Play
-4. 点击底部 **中文 / English / 日本語 / 한국어** 按钮，界面标题、按钮文字、动态 Label 全部切换
+1. 导入 uGUI Demo → 编译 CSV → 挂 `LocDemo` → Play
 
-> 使用 legacy Text，避免 TMP 默认字体无中日韩字形的问题，也不必往仓库塞字体文件。
+### UI Toolkit 一键体验
+
+1. 导入 UI Toolkit Demo → 编译 CSV
+2. 空物体加 **UI Document** + **LocDemoUITK**
+3. 指定 `LocDemo.uxml` / `LocDemo.uss`（可选，不指定则代码构建）
+4. Play → 点语言按钮切换
 
 ## Binary Format
 

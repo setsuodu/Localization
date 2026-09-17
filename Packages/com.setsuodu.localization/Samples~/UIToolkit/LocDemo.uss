@@ -1,0 +1,91 @@
+.root {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(30, 30, 36);
+}
+
+.panel {
+    width: 420px;
+    padding: 24px;
+    background-color: rgba(30, 30, 40, 0.92);
+    border-radius: 12px;
+    align-items: stretch;
+}
+
+.title {
+    font-size: 36px;
+    -unity-font-style: bold;
+    color: white;
+    -unity-text-align: middle-center;
+    margin-bottom: 8px;
+    height: 48px;
+}
+
+.current-lang {
+    font-size: 18px;
+    color: rgb(200, 200, 210);
+    -unity-text-align: middle-center;
+    margin-bottom: 16px;
+    height: 28px;
+}
+
+.btn {
+    height: 48px;
+    margin-bottom: 10px;
+    background-color: rgb(56, 115, 191);
+    border-radius: 6px;
+    border-width: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn:hover {
+    background-color: rgb(70, 140, 220);
+}
+
+.btn-label {
+    font-size: 22px;
+    color: white;
+    -unity-text-align: middle-center;
+}
+
+.steps {
+    font-size: 20px;
+    color: white;
+    -unity-text-align: middle-center;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    height: 32px;
+}
+
+.section {
+    font-size: 14px;
+    -unity-font-style: italic;
+    color: rgb(160, 160, 170);
+    -unity-text-align: middle-center;
+    margin-bottom: 10px;
+    height: 24px;
+}
+
+.lang-row {
+    flex-direction: row;
+    justify-content: space-between;
+    height: 44px;
+}
+
+.lang-btn {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0 4px;
+    height: 44px;
+    background-color: rgb(56, 115, 191);
+    border-radius: 6px;
+    border-width: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.lang-btn:hover {
+    background-color: rgb(70, 140, 220);
+}

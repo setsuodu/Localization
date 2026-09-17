@@ -2,15 +2,26 @@
 
 ## Contents
 
-- `LocLabel.cs` — custom VisualElement (extends Label)
-- `Localization.csv` — sample data（含 lang.* 语言名称）
+- `LocLabel.cs` — custom VisualElement（继承 Label，语言切换自动刷新）
+- `LocDemoUITK.cs` — MonoBehaviour 完整 Demo
+- `LocDemo.uxml` / `LocDemo.uss` — 界面与样式
+- `Localization.csv` — sample data（含 lang.*）
 
-## Usage
+## 快速体验
 
-1. Import this sample via Package Manager
-2. Copy `LocLabel.cs` into your Scripts folder
-3. Compile CSV → `.bytes`, then `Loc.Init(bytes)`
-4. In UXML:
+1. Package Manager 导入本 Sample
+2. **Tools → Localization Compiler** 编译 `Localization.csv` → 例如 `Assets/Resources/Localization.bytes`
+3. 空场景新建 GameObject，添加 **UI Document** + **LocDemoUITK**
+4. 在 LocDemoUITK 上：
+   - 拖入 `Localization.bytes`（或放到 Resources 命名为 Localization）
+   - （推荐）Source Asset 选 `LocDemo.uxml`，Style Sheet 选 `LocDemo.uss`
+5. **Play** → 点击底部语言按钮，标题 / 按钮 / 步数 Label 实时切换
+
+> 若不指定 UXML，`LocDemoUITK` 会在代码里动态构建同样界面。
+
+## 手动用法
+
+### UXML
 
 ```xml
 <ui:UXML xmlns:ui="UnityEngine.UIElements"
@@ -19,24 +30,23 @@
 </ui:UXML>
 ```
 
-Or in C#:
+### C#
 
 ```csharp
 var label = new LocLabel("ui.home.title");
 root.Add(label);
 
 label.SetKey("ui.game.steps", 12);
-Loc.SetLanguage("en_US"); // auto refresh
+Loc.SetLanguage("en_US"); // 所有 LocLabel 自动刷新
 ```
 
-## 语言切换示例
+### 语言按钮
 
 ```csharp
-// 创建几个语言按钮
 foreach (var lang in new[] { "zh_CN", "en_US", "ja_JP", "ko_KR" })
 {
-    var btn = new Button(() => Loc.SetLanguage(lang)) { text = Loc.Get("lang." + lang) };
+    var btn = new Button(() => Loc.SetLanguage(lang));
+    btn.Add(new LocLabel("lang." + lang));
     root.Add(btn);
 }
-// 所有 LocLabel 会因 OnLanguageChanged 自动刷新
 ```

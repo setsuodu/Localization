@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:loc="Localization.Samples.UIToolkit" editor-extension-mode="False">
+    <ui:VisualElement name="root" class="root">
+        <ui:VisualElement name="panel" class="panel">
+            <loc:LocLabel name="title" key="ui.home.title" class="title" />
+            <ui:Label name="current-lang" text="Current: " class="current-lang" />
+
+            <ui:Button name="btn-play" class="btn">
+                <loc:LocLabel key="ui.home.btn_play" class="btn-label" />
+            </ui:Button>
+            <ui:Button name="btn-settings" class="btn">
+                <loc:LocLabel key="ui.home.btn_settings" class="btn-label" />
+            </ui:Button>
+
+            <loc:LocLabel name="steps" key="ui.game.steps" class="steps" />
+
+            <ui:Label text="— Language —" class="section" />
+
+            <ui:VisualElement name="lang-row" class="lang-row">
+                <ui:Button name="lang-zh_CN" class="lang-btn">
+                    <loc:LocLabel key="lang.zh_CN" class="btn-label" />
+                </ui:Button>
+                <ui:Button name="lang-en_US" class="lang-btn">
+                    <loc:LocLabel key="lang.en_US" class="btn-label" />
+                </ui:Button>
+                <ui:Button name="lang-ja_JP" class="lang-btn">
+                    <loc:LocLabel key="lang.ja_JP" class="btn-label" />
+                </ui:Button>
+                <ui:Button name="lang-ko_KR" class="lang-btn">
+                    <loc:LocLabel key="lang.ko_KR" class="btn-label" />
+                </ui:Button>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
