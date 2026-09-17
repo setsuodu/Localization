@@ -54,15 +54,17 @@ Import via Package Manager → Samples:
 
 | Sample | Content |
 |--------|---------|
-| **uGUI / TextMeshPro Demo** | `LocText` + **LocDemo**（点击切换语言，标题/按钮/Label 实时刷新） |
+| **uGUI Demo (Legacy Text)** | `LocText` + `LocDemo`，纯 `UnityEngine.UI.Text`，**不依赖 TMP** |
 | **UI Toolkit Demo** | `LocLabel` VisualElement + sample CSV |
 
 ### 一键体验语言切换
 
-1. 导入 **uGUI / TextMeshPro Demo**
+1. 导入 **uGUI Demo (Legacy Text)**
 2. `Tools → Localization Compiler` 编译 `Localization.csv` → `Assets/Resources/Localization.bytes`
 3. 空场景挂 `LocDemo` 组件 → Play
 4. 点击底部 **中文 / English / 日本語 / 한국어** 按钮，界面标题、按钮文字、动态 Label 全部切换
+
+> 使用 legacy Text，避免 TMP 默认字体无中日韩字形的问题，也不必往仓库塞字体文件。
 
 ## Binary Format
 

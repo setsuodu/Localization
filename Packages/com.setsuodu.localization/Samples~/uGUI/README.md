@@ -1,12 +1,14 @@
-# uGUI / TextMeshPro Sample
+# uGUI Sample (Legacy Text)
 
 ## Contents
 
-- `LocText.cs` — MonoBehaviour for UnityEngine.UI.Text and TextMeshProUGUI
-- `LocDemo.cs` — **完整可运行示例**：点击语言按钮切换标题、按钮、Label
+- `LocText.cs` — MonoBehaviour for **UnityEngine.UI.Text** only（不依赖 TMP）
+- `LocDemo.cs` — 完整可运行示例：点击语言按钮切换标题、按钮、Label
 - `Localization.csv` — sample data（含语言名称）
 
-## 快速体验（推荐）
+> 使用 legacy Text，避免 TMP 默认字体无中日韩字形、引入自定义字体又膨胀仓库的问题。
+
+## 快速体验
 
 1. Package Manager → 导入本 Sample
 2. 打开 **Tools → Localization Compiler**
@@ -29,7 +31,7 @@
 var ta = Resources.Load<TextAsset>("Localization");
 Loc.Init(ta.bytes);
 
-// 2. 任意 Text / TMP 上挂 LocText，填 Key
+// 2. 任意 UI.Text 上挂 LocText，填 Key
 // 3. 切换语言 → 所有 LocText 自动 Refresh
 Loc.SetLanguage("en_US");
 Loc.SetLanguage("ja_JP");
@@ -38,7 +40,7 @@ Loc.SetLanguage("ja_JP");
 locText.SetKey("ui.game.steps", 12);
 ```
 
-## 关键原理
+## 工作原理
 
 `LocText` 在 `OnEnable` 时订阅 `Loc.OnLanguageChanged`，
 `Loc.SetLanguage` 触发事件后全部自动刷新，无需手动遍历 UI。

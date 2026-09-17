@@ -2,16 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 using Localization;
 
 namespace Localization.Samples.uGUI
 {
     /// <summary>
     /// Complete runnable demo: click language buttons to switch UI texts.
-    /// Attach to any GameObject in an empty scene, assign the compiled .bytes TextAsset,
-    /// then Play. No scene setup required.
-    /// Requires TextMeshPro package.
+    /// Uses legacy uGUI Text only (no TextMeshPro) so Chinese/Japanese/Korean display without custom fonts.
+    /// Attach to any GameObject in an empty scene, assign the compiled .bytes TextAsset, then Play.
     /// </summary>
     public class LocDemo : MonoBehaviour
     {
@@ -26,7 +24,7 @@ namespace Localization.Samples.uGUI
         LocText _btnPlay;
         LocText _btnSettings;
         LocText _steps;
-        TextMeshProUGUI _currentLangLabel;
+        Text _currentLangLabel;
         readonly List<Button> _langButtons = new();
 
         void Start()
@@ -95,8 +93,8 @@ namespace Localization.Samples.uGUI
             vlg.childForceExpandWidth = true;
             vlg.childForceExpandHeight = false;
 
-            _title = CreateLocText(panel, "ui.home.title", 36, FontStyles.Bold);
-            _currentLangLabel = CreatePlainTMP(panel, "", 20, FontStyles.Normal);
+            _title = CreateLocText(panel, "ui.home.title", 36, FontStyle.Bold);
+            _currentLangLabel = CreatePlainText(panel, "", 20, FontStyle.Normal);
 
             var playGo = CreateButton(panel, out _);
             _btnPlay = playGo.GetComponentInChildren<LocText>();
@@ -106,10 +104,10 @@ namespace Localization.Samples.uGUI
             _btnSettings = settingsGo.GetComponentInChildren<LocText>();
             _btnSettings.Key = "ui.home.btn_settings";
 
-            _steps = CreateLocText(panel, "ui.game.steps", 22, FontStyles.Normal);
+            _steps = CreateLocText(panel, "ui.game.steps", 22, FontStyle.Normal);
             _steps.SetKey("ui.game.steps", 12);
 
-            CreatePlainTMP(panel, "— Language —", 16, FontStyles.Italic);
+            CreatePlainText(panel, "— Language —", 16, FontStyle.Italic);
 
             string[] langs = { "zh_CN", "en_US", "ja_JP", "ko_KR" };
             string[] langKeys = { "lang.zh_CN", "lang.en_US", "lang.ja_JP", "lang.ko_KR" };
@@ -148,7 +146,13 @@ namespace Localization.Samples.uGUI
             if (_steps != null) _steps.SetKey("ui.game.steps", 12);
 
             if (_currentLangLabel != null)
-                _currentLangLabel.text = $"Current: {Loc.CurrentLang}";
+                _currentLangLabel.text = "Current: " + Loc.CurrentLang;
+        }
+
+        static Font DefaultFont()
+        {
+            // Legacy Text uses Arial by default; on most platforms OS font fallback handles CJK.
+            return Resources.GetBuiltinResource<Font>("Arial.ttf");
         }
 
         static RectTransform CreatePanel(Transform parent, Vector2 anchor, Vector2 anchoredPos, Vector2 size)
@@ -163,15 +167,20 @@ namespace Localization.Samples.uGUI
             return rt;
         }
 
-        static LocText CreateLocText(Transform parent, string key, int fontSize, FontStyles style)
+        static LocText CreateLocText(Transform parent, string key, int fontSize, FontStyle style)
         {
             var go = new GameObject("LocText_" + key, typeof(RectTransform));
             go.transform.SetParent(parent, false);
-            var tmp = go.AddComponent<TextMeshProUGUI>();
-            tmp.fontSize = fontSize;
-            tmp.fontStyle = style;
-            tmp.alignment = TextAlignmentOptions.Center;
-            tmp.color = Color.white;
+
+            var uiText = go.AddComponent<Text>();
+            uiText.font = DefaultFont();
+            uiText.fontSize = fontSize;
+            uiText.fontStyle = style;
+            uiText.alignment = TextAnchor.MiddleCenter;
+            uiText.color = Color.white;
+            uiText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            uiText.verticalOverflow = VerticalWrapMode.Overflow;
+
             var le = go.AddComponent<LayoutElement>();
             le.preferredHeight = fontSize + 16;
 
@@ -180,19 +189,24 @@ namespace Localization.Samples.uGUI
             return loc;
         }
 
-        static TextMeshProUGUI CreatePlainTMP(Transform parent, string text, int fontSize, FontStyles style)
+        static Text CreatePlainText(Transform parent, string text, int fontSize, FontStyle style)
         {
-            var go = new GameObject("TMP", typeof(RectTransform));
+            var go = new GameObject("Text", typeof(RectTransform));
             go.transform.SetParent(parent, false);
-            var tmp = go.AddComponent<TextMeshProUGUI>();
-            tmp.text = text;
-            tmp.fontSize = fontSize;
-            tmp.fontStyle = style;
-            tmp.alignment = TextAlignmentOptions.Center;
-            tmp.color = new Color(0.85f, 0.85f, 0.9f);
+
+            var uiText = go.AddComponent<Text>();
+            uiText.font = DefaultFont();
+            uiText.text = text;
+            uiText.fontSize = fontSize;
+            uiText.fontStyle = style;
+            uiText.alignment = TextAnchor.MiddleCenter;
+            uiText.color = new Color(0.85f, 0.85f, 0.9f);
+            uiText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            uiText.verticalOverflow = VerticalWrapMode.Overflow;
+
             var le = go.AddComponent<LayoutElement>();
             le.preferredHeight = fontSize + 12;
-            return tmp;
+            return uiText;
         }
 
         static GameObject CreateButton(Transform parent, out Button button)
@@ -213,10 +227,14 @@ namespace Localization.Samples.uGUI
             labelRt.anchorMax = Vector2.one;
             labelRt.offsetMin = labelRt.offsetMax = Vector2.zero;
 
-            var tmp = labelGo.AddComponent<TextMeshProUGUI>();
-            tmp.fontSize = 22;
-            tmp.alignment = TextAlignmentOptions.Center;
-            tmp.color = Color.white;
+            var uiText = labelGo.AddComponent<Text>();
+            uiText.font = DefaultFont();
+            uiText.fontSize = 22;
+            uiText.alignment = TextAnchor.MiddleCenter;
+            uiText.color = Color.white;
+            uiText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            uiText.verticalOverflow = VerticalWrapMode.Overflow;
+
             labelGo.AddComponent<LocText>();
 
             return go;
