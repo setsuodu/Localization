@@ -27,6 +27,8 @@ namespace Localization.Samples.uGUI
         Text _currentLangLabel;
         readonly List<Button> _langButtons = new();
 
+        static Font _cachedFont;
+
         void Start()
         {
             if (!InitLoc())
@@ -149,10 +151,35 @@ namespace Localization.Samples.uGUI
                 _currentLangLabel.text = "Current: " + Loc.CurrentLang;
         }
 
+        /// <summary>
+        /// Unity 6 removed Arial.ttf. Use LegacyRuntime.ttf (built-in).
+        /// Falls back to Resources.GetBuiltinResource for older Unity versions.
+        /// </summary>
         static Font DefaultFont()
         {
-            // Legacy Text uses Arial by default; on most platforms OS font fallback handles CJK.
-            return Resources.GetBuiltinResource<Font>("Arial.ttf");
+            if (_cachedFont != null) return _cachedFont;
+
+            // Unity 6+
+            _cachedFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            if (_cachedFont != null) return _cachedFont;
+
+            // Unity 2022 / 2023
+            _cachedFont = Resources.GetBuiltinResource<Font>("Arial.ttf");
+            if (_cachedFont != null) return _cachedFont;
+
+            // Last resort: create dynamic font from OS (supports CJK on most platforms)
+            _cachedFont = Font.CreateDynamicFontFromOSFont(new[]
+            {
+                "Arial",
+                "Helvetica",
+                "PingFang SC",
+                "Microsoft YaHei",
+                "Noto Sans CJK SC",
+                "Source Han Sans SC",
+                "sans-serif"
+            }, 16);
+
+            return _cachedFont;
         }
 
         static RectTransform CreatePanel(Transform parent, Vector2 anchor, Vector2 anchoredPos, Vector2 size)
