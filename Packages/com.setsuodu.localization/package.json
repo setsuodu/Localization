@@ -4,10 +4,11 @@
   "displayName": "Localization",
   "description": "Pure Excel-driven localization core for Unity. No ScriptableObject. Key-based. Binary hot-update friendly. UI bindings as Samples (legacy uGUI Text + UI Toolkit with UXML demo).",
   "unity": "2022.3",
-  "author": {
-    "name": "setsuodu",
-    "url": "https://github.com/setsuodu"
-  },
+  "unityRelease": "0f1",
+  "documentationUrl": "https://github.com/setsuodu/Localization/blob/main/Packages/com.setsuodu.localization/README.md",
+  "changelogUrl": "https://github.com/setsuodu/Localization/blob/main/Packages/com.setsuodu.localization/CHANGELOG.md",
+  "licensesUrl": "https://github.com/setsuodu/Localization/blob/main/Packages/com.setsuodu.localization/LICENSE",
+  "license": "MIT",
   "keywords": [
     "localization",
     "excel",
@@ -15,7 +16,10 @@
     "l10n",
     "multilingual"
   ],
-  "license": "MIT",
+  "author": {
+    "name": "setsuodu",
+    "url": "https://github.com/setsuodu"
+  },
   "dependencies": {},
   "samples": [
     {
